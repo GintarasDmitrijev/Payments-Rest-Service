@@ -27,7 +27,7 @@ This API provides the following endpoints to control the flow:
 
 |Method|Endpoint URL|Parameter  |Description|Example|
 |------------|-----------|-----------|-------|-------|
-|GET|/payments    |    |et all payments|http://localhost:8080/payments   |
+|GET|/payments    |    |Get all payments|http://localhost:8080/payments   |
 |GET|/payments/{id} | -  |Get one payment|http://localhost:8080/payments/1|
 |PUT|/payments/{id}/cancel  | |Cancel the payment|http://localhost:8080/payments/1/cancel  |
 
