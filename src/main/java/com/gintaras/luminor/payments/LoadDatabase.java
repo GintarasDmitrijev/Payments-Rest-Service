@@ -1,8 +1,8 @@
 package com.gintaras.luminor.payments;
 
 import com.gintaras.luminor.payments.model.Money;
-import com.gintaras.luminor.payments.model.Type1PaymentType;
-import com.gintaras.luminor.payments.model.Type2PaymentType;
+import com.gintaras.luminor.payments.model.PaymentType1;
+import com.gintaras.luminor.payments.model.PaymentType2;
 import com.gintaras.luminor.payments.repository.PaymentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,10 +33,10 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(PaymentRepository paymentRepository) {
 
         return args -> {
-            log.info("Preloading " + paymentRepository.save(new Type1PaymentType(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT)));
-            log.info("Preloading " + paymentRepository.save(new Type1PaymentType(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT)));
-            log.info("Preloading " + paymentRepository.save(new Type2PaymentType(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT)));
-            log.info("Preloading " + paymentRepository.save(new Type1PaymentType(AMOUNT_1_USD, IBAN, IBAN
+            log.info("Preloading " + paymentRepository.save(new PaymentType1(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT)));
+            log.info("Preloading " + paymentRepository.save(new PaymentType1(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT)));
+            log.info("Preloading " + paymentRepository.save(new PaymentType2(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT)));
+            log.info("Preloading " + paymentRepository.save(new PaymentType1(AMOUNT_1_USD, IBAN, IBAN
                     ,LocalDateTime.now().minusHours(1))));
         };
     }

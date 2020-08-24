@@ -3,8 +3,8 @@ package com.gintaras.luminor.payments.service;
 import com.gintaras.luminor.payments.exception.PaymentValidationException;
 import com.gintaras.luminor.payments.model.AbstractPaymentType;
 import com.gintaras.luminor.payments.model.Money;
-import com.gintaras.luminor.payments.model.Type1PaymentType;
-import com.gintaras.luminor.payments.model.Type2PaymentType;
+import com.gintaras.luminor.payments.model.PaymentType1;
+import com.gintaras.luminor.payments.model.PaymentType2;
 import com.gintaras.luminor.payments.repository.PaymentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +47,8 @@ class PaymentServiceImplTest {
 
     @Test
     void shouldFindAllPayments() {
-        Type1PaymentType paymentType1 = new Type1PaymentType(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
-        Type2PaymentType paymentType2 = new Type2PaymentType(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
+        PaymentType1 paymentType1 = new PaymentType1(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
+        PaymentType2 paymentType2 = new PaymentType2(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
         when(paymentRepository.findAll()).thenReturn(Arrays.asList(paymentType1, paymentType2));
 
         List<AbstractPaymentType> result = paymentService.findAll();
@@ -58,7 +58,7 @@ class PaymentServiceImplTest {
 
     @Test
     void shouldFindOnePaymentById() {
-        Type1PaymentType paymentType1 = new Type1PaymentType(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
+        PaymentType1 paymentType1 = new PaymentType1(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
         when(paymentRepository.findById(ID_1)).thenReturn(Optional.of(paymentType1));
 
         AbstractPaymentType result = paymentService.findById(ID_1).get();
@@ -67,14 +67,14 @@ class PaymentServiceImplTest {
 
     @Test
     void shouldNotThrowValidationException_ifPaymentCreatedToday() {
-        Type1PaymentType paymentType1 = new Type1PaymentType(AMOUNT_1_USD, IBAN, IBAN, LocalDateTime.now().minusHours(1));
+        PaymentType1 paymentType1 = new PaymentType1(AMOUNT_1_USD, IBAN, IBAN, LocalDateTime.now().minusHours(1));
 
         assertDoesNotThrow(() -> paymentService.validatePaymentForCancellation(paymentType1));
     }
 
     @Test
     void shouldThrowValidationException_ifPaymentCreatedNotToday() {
-        Type1PaymentType paymentType1 = new Type1PaymentType(AMOUNT_1_USD, IBAN, IBAN, LocalDateTime.now().minusDays(2));
+        PaymentType1 paymentType1 = new PaymentType1(AMOUNT_1_USD, IBAN, IBAN, LocalDateTime.now().minusDays(2));
 
         Exception exception = assertThrows(PaymentValidationException.class, () -> {
             paymentService.validatePaymentForCancellation(paymentType1);

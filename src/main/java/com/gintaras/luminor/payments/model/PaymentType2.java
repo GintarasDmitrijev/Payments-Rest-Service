@@ -10,33 +10,32 @@ import java.time.LocalDateTime;
 import java.util.Currency;
 
 /**
- * Payment type that represent payment of TYPE1.
+ * Payment type that represent payment of TYPE2.
  *
- * @created 19/08/2020 - 8:20 PM
+ * @created 19/08/2020 - 8:21 PM
  * @author gintaras
  */
 @Entity
-@DiscriminatorValue("TYPE1")
-public class Type1PaymentType extends AbstractPaymentType {
+@DiscriminatorValue("TYPE2")
+public class PaymentType2 extends AbstractPaymentType {
 
-    private final static float  FEE_FACTOR = 0.05f;
+    private final static float  FEE_FACTOR = 0.1f;
 
     private String details;
 
-    public Type1PaymentType() {
-
+    public PaymentType2() {
     }
 
-    public Type1PaymentType(Money amount, String debtorIBAN, String creditorIBAN, String details) {
+    public PaymentType2(Money amount, String debtorIBAN, String creditorIBAN, String details) {
         this(amount, debtorIBAN, creditorIBAN);
         this.details = details;
     }
 
-    public Type1PaymentType(Money amount, String debtorIBAN, String creditorIBAN) {
+    public PaymentType2(Money amount, String debtorIBAN, String creditorIBAN) {
         super(amount, debtorIBAN, creditorIBAN);
     }
 
-    public Type1PaymentType(Money amount, String debtorIBAN, String creditorIBAN, LocalDateTime creationDate) {
+    public PaymentType2(Money amount, String debtorIBAN, String creditorIBAN, LocalDateTime creationDate) {
         super(amount, debtorIBAN, creditorIBAN, creationDate);
     }
 
@@ -60,8 +59,9 @@ public class Type1PaymentType extends AbstractPaymentType {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder(super.toString());
-        builder.append(", details=").append(details)
+        builder.append("details=").append(details)
                 .append("}");
         return builder.toString();
     }
+
 }

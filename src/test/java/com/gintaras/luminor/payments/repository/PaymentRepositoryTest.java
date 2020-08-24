@@ -45,13 +45,13 @@ class PaymentRepositoryTest {
     @Test
     public void should_find_all_payments() {
         // when
-        Type1PaymentType payment1 = new Type1PaymentType(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
+        PaymentType1 payment1 = new PaymentType1(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
         entityManager.persist(payment1);
 
-        Type2PaymentType payment2 = new Type2PaymentType(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
+        PaymentType2 payment2 = new PaymentType2(AMOUNT_1_USD, IBAN, IBAN, DETAILS_TEXT);
         entityManager.persist(payment2);
 
-        Type3PaymentType payment3 = new Type3PaymentType(AMOUNT_1_USD, IBAN, IBAN, IBAN);
+        PaymentType3 payment3 = new PaymentType3(AMOUNT_1_USD, IBAN, IBAN, IBAN);
         entityManager.persist(payment3);
 
         Iterable<AbstractPaymentType> payments = repository.findAll();

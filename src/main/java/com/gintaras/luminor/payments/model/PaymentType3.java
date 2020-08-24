@@ -1,7 +1,5 @@
 package com.gintaras.luminor.payments.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.math.BigDecimal;
@@ -10,32 +8,29 @@ import java.time.LocalDateTime;
 import java.util.Currency;
 
 /**
- * Payment type that represent payment of TYPE2.
+ * Payment type that represent payment of TYPE3.
  *
- * @created 19/08/2020 - 8:21 PM
+ * @created 19/08/2020 - 8:22 PM
  * @author gintaras
  */
 @Entity
-@DiscriminatorValue("TYPE2")
-public class Type2PaymentType extends AbstractPaymentType {
+@DiscriminatorValue("TYPE3")
+public class PaymentType3 extends AbstractPaymentType {
 
-    private final static float  FEE_FACTOR = 0.1f;
+    private final static float  FEE_FACTOR = 0.15f;
 
-    private String details;
+    private String creditorBankBIC;
 
-    public Type2PaymentType() {
-    }
-
-    public Type2PaymentType(Money amount, String debtorIBAN, String creditorIBAN, String details) {
+    public PaymentType3(Money amount, String debtorIBAN, String creditorIBAN, String creditorBankBIC) {
         this(amount, debtorIBAN, creditorIBAN);
-        this.details = details;
+        this.creditorBankBIC = creditorBankBIC;
     }
 
-    public Type2PaymentType(Money amount, String debtorIBAN, String creditorIBAN) {
+    public PaymentType3(Money amount, String debtorIBAN, String creditorIBAN) {
         super(amount, debtorIBAN, creditorIBAN);
     }
 
-    public Type2PaymentType(Money amount, String debtorIBAN, String creditorIBAN, LocalDateTime creationDate) {
+    public PaymentType3(Money amount, String debtorIBAN, String creditorIBAN, LocalDateTime creationDate) {
         super(amount, debtorIBAN, creditorIBAN, creationDate);
     }
 
@@ -46,22 +41,19 @@ public class Type2PaymentType extends AbstractPaymentType {
                 .setScale(2, RoundingMode.HALF_UP), Currency.getInstance("EUR"));
     }
 
-    @JsonIgnore
-    public String getDetails() {
-        return details;
+    public String getCreditorBankBIC() {
+        return creditorBankBIC;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setCreditorBankBIC(String creditorBankBIC) {
+        this.creditorBankBIC = creditorBankBIC;
     }
-
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder(super.toString());
-        builder.append("details=").append(details)
+        builder.append("creditorBankBIC=").append(creditorBankBIC)
                 .append("}");
         return builder.toString();
     }
-
 }
