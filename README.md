@@ -18,7 +18,7 @@ The directory ```postman_collection``` contains the collection of Postman reques
 explore the functionality. 
 
 ### Preloaded data
-When application starts, the ```LoadDatabase``` class preloads in-memmory database with some ammount of payments. Most
+When application starts, the ```LoadDatabase``` class preloads in-memory database with some ammount of payments. Most
 of them have ```creationDate``` value of "now". However, if you want to examine the calculation of cancellation fee,
 try cancel the payment with id 4, which is preloaded to database with value of ```creationDate``` as one hour in the past.
 
